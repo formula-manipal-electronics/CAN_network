@@ -83,7 +83,7 @@ ADC_Set_Input_Channel(_ADC_CHANNEL_10 | _ADC_CHANNEL_11 | _ADC_CHANNEL_12 | _ADC
                    _CAN_CONFIG_TX_FIFO_PRIORITY_BY_IDINTIFIER &
                    _CAN_CONFIG_WAKE_UP;
 
-  CAN1InitializeAdvanced(1,2,8,3,8,Can_Init_Flags, &_GPIO_MODULE_CAN1_PB89);  // Initialize CAN module
+  CAN1InitializeAdvanced(2,2,7,4,8,Can_Init_Flags, &_GPIO_MODULE_CAN1_PB89);  // Initialize CAN module
   CAN1SetOperationMode(_CAN_OperatingMode_Initialization);
   CANSetFilterScale32(0, _CAN_FILTER_ENABLED & _CAN_FILTER_ID_MASK_MODE & _CAN_FILTER_STD_MSG, 1525, -1);
   CANSetFilterScale32(1, _CAN_FILTER_ENABLED & _CAN_FILTER_ID_MASK_MODE & _CAN_FILTER_STD_MSG, 1530, -1);
@@ -95,6 +95,7 @@ ADC_Set_Input_Channel(_ADC_CHANNEL_10 | _ADC_CHANNEL_11 | _ADC_CHANNEL_12 | _ADC
     Msg_Rcvd = CAN1Read(0, &Rx_ID , RxTx_Data , &Rx_Data_Len, &Can_Rcv_Flags); // receive message
     if ((Rx_ID==1525) &&Msg_Rcvd)                                                 // if message received
     {
+       j = 0;
       //read for data
        read(read_array);
       //high and low
@@ -104,7 +105,7 @@ ADC_Set_Input_Channel(_ADC_CHANNEL_10 | _ADC_CHANNEL_11 | _ADC_CHANNEL_12 | _ADC
       len2 = 8;
       len3 = 2;
       format(len1,len2,len3,j);
-       
+
       CAN1Write(1526, send_data1, 8, Can_Send_Flags);
       CAN1Write(1527, send_data2, 8, Can_Send_Flags);
       CAN1Write(1528, send_data3, 2, Can_Send_Flags);
@@ -115,7 +116,7 @@ ADC_Set_Input_Channel(_ADC_CHANNEL_10 | _ADC_CHANNEL_11 | _ADC_CHANNEL_12 | _ADC
     {
     if( j==1)
     {
-       
+
       //read for data
        read(read_array);
       //high and low
@@ -125,7 +126,7 @@ ADC_Set_Input_Channel(_ADC_CHANNEL_10 | _ADC_CHANNEL_11 | _ADC_CHANNEL_12 | _ADC
       len2 = 4;
       len3 = 4;
       format(len1,len2,len3,j);
-    
+
       CAN1Write(1534, send_data3, 4, Can_Send_Flags);
       CAN1Write(1531, send_data1, 8, Can_Send_Flags);
       CAN1Write(1532, send_data2, 4, Can_Send_Flags);
@@ -142,7 +143,7 @@ ADC_Set_Input_Channel(_ADC_CHANNEL_10 | _ADC_CHANNEL_11 | _ADC_CHANNEL_12 | _ADC
       len2 = 4;
       len3 = 0;
       format(len1,len2,len3,j);
-  
+
      CAN1Write(1531, send_data1, 8, Can_Send_Flags);
      CAN1Write(1532, send_data2, 4, Can_Send_Flags);
      j++;

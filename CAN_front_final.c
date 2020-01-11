@@ -73,7 +73,7 @@ ADC_Set_Input_Channel(_ADC_CHANNEL_10 | _ADC_CHANNEL_11 | _ADC_CHANNEL_12 | _ADC
                    _CAN_CONFIG_TX_FIFO_PRIORITY_BY_IDINTIFIER &
                    _CAN_CONFIG_WAKE_UP;
 
-  CAN1InitializeAdvanced(1,2,8,3,8,Can_Init_Flags, &_GPIO_MODULE_CAN1_PB89);  // Initialize CAN module
+  CAN1InitializeAdvanced(2,2,7,4,8,Can_Init_Flags, &_GPIO_MODULE_CAN1_PB89);  // Initialize CAN module
   CAN1SetOperationMode(_CAN_OperatingMode_Initialization);
   CANSetFilterScale32(0, _CAN_FILTER_ENABLED & _CAN_FILTER_ID_MASK_MODE & _CAN_FILTER_STD_MSG, 1522, -1);
   CANSetFilterScale32(1, _CAN_FILTER_ENABLED & _CAN_FILTER_ID_MASK_MODE & _CAN_FILTER_STD_MSG, 1532, -1);
